@@ -1,0 +1,5 @@
+ADMIN-CREDENTIAL
+ADMIN EMAIL : admin@gmail.com
+ADMIN PASSWORD : admin123
+DATABASE 
+NAME : rapid_rescue

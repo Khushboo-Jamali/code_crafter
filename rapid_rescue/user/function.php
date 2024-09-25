@@ -174,3 +174,12 @@ if (isset($_POST['up_emt'])) {
 
     header("location:view_emt.php");
 }
+// delete feedback
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    $del = "DELETE FROM `feedback` WHERE feed_id = '$id'";
+    $res = mysqli_query($conn, $del);
+    if ($res) {
+        header("location:view_feedback.php");
+    }
+}

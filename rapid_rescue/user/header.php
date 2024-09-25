@@ -55,7 +55,7 @@ if (!isset($_SESSION['userId'])) {
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/apple-touch-icon.png" alt="">
+        <img src="./assets/img/apple-touch-icon.png" alt="">
         <span class="d-none d-lg-block">Admin Dashboard</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -97,7 +97,7 @@ if (!isset($_SESSION['userId'])) {
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="admin_profile.php">
+              <a class="dropdown-item d-flex align-items-center" href="user_profile.php">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>

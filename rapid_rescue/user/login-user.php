@@ -1,4 +1,8 @@
+<?php
+include "config.php";
+session_start();
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +16,7 @@
 
   <!-- Favicons -->
   <link href="assets/img/apple-touch-icon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -61,22 +65,31 @@
 
   <main>
     <?php
+    if (isset($_POST['login'])) {
+      $id = $_POST['id'];
+      $email = $_POST['email'];
+      $password = md5($_POST['password']);
+      $sql = "SELECT * FROM users WHERE email='$email' AND password = '$password'";
+      $res = mysqli_query($conn, $sql);
+      $row = mysqli_num_rows($res);
+      if ($row > 0) {
+        while ($data = mysqli_fetch_assoc($res)) {
+          $_SESSION['userId'] = $data['user_id'];
+          $_SESSION['username'] = $data['firstname'];
+          $_SESSION['userpic'] = $data['pic'];
+        }
 
-    // if (isset($_POST['login'])) {
-
-    //   if ($_REQUEST['email'] == 'admin@gmail.com' && $_REQUEST['password'] == 'admin123') {
-    //     $_SESSION['email'] = $_POST['email'];
-    //     $_SESSION['password'] = $_POST['password'];
-    //     header('location:dashboard.php');
-    //   } else {
+        header("location:dashboard.php");
+      } else {
 
         $error = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong>Error</strong> Invalid Email And Password
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>';
-    //     echo  $error;
-    //   }
-    // }
+    <strong>Error</strong> Invalid Email And Password
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>';
+        echo  $error;
+      }
+    }
+
 
     ?>
     <div class="container">
@@ -97,10 +110,10 @@
                     <p class="text-center small">Enter your Email & Password to login</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate method="post" action="function.php">
+                  <form class="row g-3 needs-validation" novalidate method="post">
 
                     <div class="col-12">
-
+                      <input type="hidden" name="id">
                       <div class="input-group has-validation my-4">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
                         <input type="email" name="email" class="form-control" id="yourUsername" required placeholder="Email">
@@ -125,14 +138,17 @@
                         <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
                         <label class="form-check-label" for="rememberMe">Remember me</label>
 
+
+
                       </div>
                     </div>
                     <div class="col-12">
                       <button class="btn btn-primary w-100" name="login" type="submit">Login</button>
+                      Create Account <a href="./signup.php" class="my-2"> Sign Up</a>
                     </div>
 
                   </form>
-                    Don't have an account <a href="signup.php">signup</a>
+
                 </div>
               </div>
 

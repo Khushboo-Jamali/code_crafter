@@ -8,7 +8,7 @@ if (isset($_POST['login'])) {
     $res = mysqli_query($conn, $sql);
     $row = mysqli_num_rows($res);
     if ($row > 0) {
-        while($data = mysqli_fetch_assoc($res)){
+        while ($data = mysqli_fetch_assoc($res)) {
             $_SESSION['userId'] = $data['user_id'];
             $_SESSION['username'] = $data['firstname'];
             $_SESSION['userpic'] = $data['pic'];
@@ -16,17 +16,39 @@ if (isset($_POST['login'])) {
         // if ($_REQUEST['password'] == $_POST['password'] && $_REQUEST['email'] == $_POST['email']) {
         //     $_SESSION['password'] = $_POST['password'];
         //     $_SESSION['email'] = $_POST['email'];
-            // $_SESSION['userId'] = $_POST['email'];
+        // $_SESSION['userId'] = $_POST['email'];
 
-            header("location:dashboard.php");
-        }
-    } else {
-        header("location:login-user.php");
+        header("location:dashboard.php");
     }
+} else {
+    header("location:login-user.php");
+}
 
 // login code
 
-
+// admin profile and users update 
+if (isset($_POST['up_admin'])) {
+    $id = $_POST['id'];
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $add = $_POST['address'];
+    $img_name = $_FILES['img']['name'];
+    $tmp_name = $_FILES['img']['tmp_name'];
+    $folder = "images/" . $img_name;
+    if (move_uploaded_file($tmp_name, $folder)) {
+        $sql = "UPDATE `users` SET `firstname`='$fname',`lastname`='$lname',`email`='$email',`phonenumber`='$phone', `address`='$add' ,`pic`='$folder' WHERE user_id ='$id'";
+        $qurey = mysqli_query($conn, $sql);
+        if ($qurey) {
+            header("location:admin_profile.php");
+        }
+    } else {
+        $sql = "UPDATE `users` SET `firstname`='$fname',`lastname`='$lname',`email`='$email',`phonenumber`='$phone', `address`='$add'  WHERE user_id ='$id'";
+        $qurey = mysqli_query($conn, $sql);
+        header("location:admin_profile.php");
+    }
+}
 
 
 // add emt

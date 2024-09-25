@@ -2,7 +2,7 @@
 session_start();
 include "config.php";
 if (!isset($_SESSION['userId'])) {
-  header('location:login-user.php');
+  header('location:index.php');
   exit();
 }
 
@@ -15,13 +15,13 @@ if (!isset($_SESSION['userId'])) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Rapid-Rescue_user-dashboard </title>
+  <title>Admin</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="images/logo.png" rel="icon">
-  <link href="images/logo.png" rel="logo.png">
+  <link href="assets/img/apple-touch-icon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -54,9 +54,9 @@ if (!isset($_SESSION['userId'])) {
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="login-user.php" class="logo d-flex align-items-center">
-        <img src="images/logo.png" alt="">
-        <span class="d-none d-lg-block">User Dashboard</span>
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/apple-touch-icon.png" alt="">
+        <span class="d-none d-lg-block">Admin Dashboard</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -67,18 +67,8 @@ if (!isset($_SESSION['userId'])) {
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form>
     </div><!-- End Search Bar -->
-    <?php
-    $sel = "SELECT * FROM users";
-    $res = mysqli_query($conn, $sel);
-    while ($data = mysqli_fetch_array($res)) {
-      $_SESSION['userId'] = $data['user_id'];
-      $_SESSION['userpic'] = $data['pic'];
-      $_SESSION['username'] = $data['firstname'];
-    //   $_SESSION['userpic']=$data[''];
 
 
-    }
-    ?>
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
@@ -107,7 +97,7 @@ if (!isset($_SESSION['userId'])) {
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="user_profile.php">
+              <a class="dropdown-item d-flex align-items-center" href="admin_profile.php">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -140,7 +130,7 @@ if (!isset($_SESSION['userId'])) {
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="login-user.php">
+        <a class="nav-link collapsed" href="dashboard.php">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -148,18 +138,18 @@ if (!isset($_SESSION['userId'])) {
 
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#ambulance-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Book Ambulance</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" data-bs-target="#ambulance-nav" data-bs-toggle="collapse" href="">
+          <i class="bi bi-journal-text"></i><span>Ambulance</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="ambulance-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="Emergency.php">
-              <i class="bi bi-circle"></i><span>Emergency Ambulance</span>
+            <a href="add_ambulance.php">
+              <i class="bi bi-circle"></i><span>Add Ambulance</span>
             </a>
           </li>
           <li>
-            <a href="Non-Emergency.php">
-              <i class="bi bi-circle"></i><span>Non-Emergency Ambulance</span>
+            <a href="view_ambulance.php">
+              <i class="bi bi-circle"></i><span>View Ambulance</span>
             </a>
           </li>
 
@@ -173,53 +163,27 @@ if (!isset($_SESSION['userId'])) {
         </a>
         <ul id="driver-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
+            <a href="add_driver.php">
+              <i class="bi bi-circle"></i><span>Add Driver</span>
+            </a>
+          </li>
+          <li>
             <a href="view_driver.php">
-              <i class="bi bi-circle"></i><span>View Status</span>
+              <i class="bi bi-circle"></i><span>View Driver</span>
             </a>
           </li>
 
-        </ul>
-      </li><!-- End Forms Nav -->
-      
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#ambul-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>View Ambulance</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="ambul-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="view-ambulance.php">
-              <i class="bi bi-circle"></i><span>View Status</span>
-            </a>
-          </li>
-
-        </ul>
-      </li><!-- End Forms Nav -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#medical-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Medical History</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="medical-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="add_medical_history.php">
-              <i class="bi bi-circle"></i><span>Add Medical History</span>
-            </a>
-          </li>
-          <li>
-            <a href="view_medical_history.php">
-              <i class="bi bi-circle"></i><span>View Medical History</span>
-            </a>
-          </li>
         </ul>
       </li><!-- End Forms Nav -->
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#pat-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>First-Aid_Instructions</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-journal-text"></i><span>Emergency Request</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="pat-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
           <li>
-            <a href="view_instruction.php">
-              <i class="bi bi-circle"></i><span>View Instructions</span>
+            <a href="view_request.php">
+              <i class="bi bi-circle"></i><span>View Request</span>
             </a>
           </li>
 
@@ -232,6 +196,11 @@ if (!isset($_SESSION['userId'])) {
         </a>
         <ul id="dis-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
+            <a href="add_emt.php">
+              <i class="bi bi-circle"></i><span>Add Emt</span>
+            </a>
+          </li>
+          <li>
             <a href="view_emt.php">
               <i class="bi bi-circle"></i><span>View Emt</span>
             </a>
@@ -241,6 +210,22 @@ if (!isset($_SESSION['userId'])) {
       </li><!-- End Forms Nav -->
 
 
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#feed" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>FeedBack</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="feed" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+          <li>
+            <a href="view_feedback.php">
+              <i class="bi bi-circle"></i><span>View FeedBack</span>
+            </a>
+          </li>
+
+        </ul>
+      </li><!-- End Forms Nav -->
 
 
 

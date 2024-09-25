@@ -67,76 +67,61 @@ if (!isset($_SESSION['userId'])) {
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form>
     </div><!-- End Search Bar -->
-    <?php
-    // $sel = "SELECT * FROM users ";
 
-    // $res = mysqli_query($conn, $sel);
-    // if (mysqli_num_rows($res) > 0) {
 
-    //   while ($data = mysqli_fetch_array($res)) {
-    //     $_SESSION['userId'] = $data['user_id'];
-    //     $_SESSION['userpic'] = $data['pic'];
-    //     $_SESSION['username'] = $data['firstname'];
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
 
-    ?>
+        </li><!-- End Messages Nav -->
 
-        <nav class="header-nav ms-auto">
-          <ul class="d-flex align-items-center">
+        <li class="nav-item dropdown pe-3">
 
-            </li><!-- End Messages Nav -->
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="<?php if (isset($_SESSION['userpic'])) {
+                        echo $_SESSION['userpic'];
+                      } ?>" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?php if (isset($_SESSION['username'])) {
+                                                                    echo $_SESSION['username'];
+                                                                  } ?></span>
+          </a><!-- End Profile Iamge Icon -->
 
-            <li class="nav-item dropdown pe-3">
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6><?php if (isset($_SESSION['username'])) {
+                    echo $_SESSION['username'];
+                  } ?></h6>
+              <span>Web Designer</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
-              <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                <img src="<?php if (isset($_SESSION['userpic'])) {
-                            echo $_SESSION['userpic'];
-                          } ?>" alt="Profile" class="rounded-circle">
-                <span class="d-none d-md-block dropdown-toggle ps-2"><?php if (isset($_SESSION['username'])) {
-                                                                        echo $_SESSION['username'];
-                                                                      } ?></span>
-              </a><!-- End Profile Iamge Icon -->
-
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                <li class="dropdown-header">
-                  <h6><?php if (isset($_SESSION['username'])) {
-                        echo $_SESSION['username'];
-                      } ?></h6>
-                  <span>Web Designer</span>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-
-                <li>
-                  <a class="dropdown-item d-flex align-items-center" href="admin_profile.php">
-                    <i class="bi bi-person"></i>
-                    <span>My Profile</span>
-                  </a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="admin_profile.php">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
 
 
 
-                <li>
-                  <a class="dropdown-item d-flex align-items-center" href="logout.php">
-                    <i class="bi bi-box-arrow-right"></i>
-                    <span>Sign Out</span>
-                  </a>
-                </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="logout.php">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
 
-              </ul><!-- End Profile Dropdown Items -->
-            </li><!-- End Profile Nav -->
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
 
-          </ul>
-        </nav><!-- End Icons Navigation -->
-    <?php
+      </ul>
+    </nav><!-- End Icons Navigation -->
 
-    //   }
-    // }
-    ?>
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
@@ -145,7 +130,7 @@ if (!isset($_SESSION['userId'])) {
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php">
+        <a class="nav-link collapsed" href="dashboard.php">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -153,7 +138,7 @@ if (!isset($_SESSION['userId'])) {
 
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#ambulance-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#ambulance-nav" data-bs-toggle="collapse" href="">
           <i class="bi bi-journal-text"></i><span>Ambulance</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="ambulance-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
